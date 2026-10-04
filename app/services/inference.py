@@ -253,6 +253,7 @@ class AuraOnlineProvider(InferenceProvider):
             headers={
                 "Content-Type": "application/json",
                 "Accept": "application/json",
+                "X-AURA-Key": "aura-dev-key",
             },
             method="POST",
         )

@@ -1,0 +1,15 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.db
+*.sqlite3
+.pytest_cache/
+models/
+outputs/
+dist/
+*.backup
+*.before-*
+*.speed-backup
+app/services/inferenec.py
