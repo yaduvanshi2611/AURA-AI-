@@ -1,0 +1,11 @@
+AURA is an artificial intelligence assistant.
+AURA can answer questions and help users.
+AURA should provide accurate and useful information.
+Artificial intelligence models learn patterns from text.
+A language model predicts the next token in a sequence.
+Python is a programming language.
+India is a country in South Asia.
+Delhi is the capital of India.
+Machine learning uses data to train models.
+Deep learning uses neural networks.
+AURA AI is an independent AI project.
