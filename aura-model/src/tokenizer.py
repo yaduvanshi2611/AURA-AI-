@@ -25,7 +25,7 @@ class AURATokenizer:
     def tokenize(self, text):
         return re.findall(
             r"<[^>\s]+>|[\w]+(?:['’][\w]+)*|[^\w\s]",
-            text,
+            text.lower(),
             flags=re.UNICODE,
         )
 
