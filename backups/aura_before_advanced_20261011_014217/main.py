@@ -4,7 +4,6 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from app.core.database import init_db
 from app.routers import auth, aura, chat, keys, training
-from app.routers import intelligence
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
@@ -17,7 +16,6 @@ app.include_router(aura.router, prefix='/api/aura', tags=['AURA Online'])
 app.include_router(keys.router, prefix='/api/keys', tags=['API keys'])
 app.include_router(chat.router, prefix='/api/chat', tags=['inference'])
 app.include_router(training.router, prefix='/api/training', tags=['training'])
-app.include_router(intelligence.router, prefix='/api/intelligence', tags=['AURA Intelligence'])
 app.mount('/static', StaticFiles(directory='app/static'), name='static')
 
 @app.get('/', response_class=HTMLResponse, include_in_schema=False)

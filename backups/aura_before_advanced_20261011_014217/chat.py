@@ -5,7 +5,6 @@ from pydantic import BaseModel, Field
 from app.dependencies import current_user
 from app.models import User
 from app.services.inference import get_provider
-from app.services.aura_intelligence import build_chat_prompt, remember
 
 router = APIRouter()
 
@@ -20,14 +19,8 @@ def chat(
     user: User = Depends(current_user),
 ):
     provider = get_provider()
-    user_key = str(getattr(user, "email", None) or getattr(user, "id", "unknown"))
-    prompt = build_chat_prompt(user_key, data.message)
-    reply = provider.generate(prompt)
-    # Save the user message and answer as account-scoped memory.
-    remember(user_key, "User: " + data.message[:900])
-    remember(user_key, "AURA: " + reply[:900])
     return {
-        "reply": reply,
+        "reply": provider.generate(data.message),
         "model": provider.model_name,
         "user": user.email,
     }
@@ -39,11 +32,8 @@ def chat_stream(
     user: User = Depends(current_user),
 ):
     provider = get_provider()
-    user_key = str(getattr(user, "email", None) or getattr(user, "id", "unknown"))
-    prompt = build_chat_prompt(user_key, data.message)
-    remember(user_key, "User: " + data.message[:900])
     return StreamingResponse(
-        provider.generate_stream(prompt),
+        provider.generate_stream(data.message),
         media_type="text/plain; charset=utf-8",
         headers={
             "X-AURA-Model": provider.model_name,
